@@ -56,5 +56,12 @@ module.exports.updateOne = (req, res) =>{
 }
 
 module.exports.deleteOne = (req, res) =>{
-    
+    const id = req.params.id
+    ToDo.findByIdAndDelete(id)
+    .then((todo)=>{
+        res.send({message: "todo deleted successfully"})
+    })
+    .catch(error =>{
+        res.status(500).json({message:error.message})
+    })
 }
