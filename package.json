@@ -1,0 +1,28 @@
+{
+  "name": "backend-assignments-Upendra12395",
+  "version": "1.0.0",
+  "description": "- Create APIs to get all, get by id, add, update by id and delete by id a TODO list\r - Should use MongoDB as a database\r - API should not have any additional routes",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/exponentsoftware/backend-assignments-Upendra12395.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/exponentsoftware/backend-assignments-Upendra12395/issues"
+  },
+  "homepage": "https://github.com/exponentsoftware/backend-assignments-Upendra12395#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.7",
+    "nodemon": "^2.0.13"
+  }
+}
