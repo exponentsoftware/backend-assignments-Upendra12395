@@ -1,5 +1,6 @@
 const mongoose =  require('mongoose')
 
+//model for todo 
 const todoSchema = new mongoose.Schema({
     userName:{
         type : String,

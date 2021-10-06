@@ -2,6 +2,7 @@ const express = require('express')
 const ToDo = require('../models/todo')
 const bodyParser = require('body-parser')
 
+// controller to add todo
 module.exports.addtodo = (req, res) =>{
     const { userName, title, status, category} = req.body
     if (!userName || !title || !status || !category){
@@ -21,6 +22,7 @@ module.exports.addtodo = (req, res) =>{
 				});
 }
 
+//controller to shwo all todo
 module.exports.showToDo = (req, res) =>{
     ToDo.find()
     .then((todos) =>{
@@ -32,6 +34,7 @@ module.exports.showToDo = (req, res) =>{
     
 }
 
+//controller to show one todo by id
 module.exports.getOnetodo = (req, res) =>{
     let id = req.params.id
     ToDo.findById(id)
@@ -43,6 +46,7 @@ module.exports.getOnetodo = (req, res) =>{
     })
 }
 
+//controller to update one todo by id
 module.exports.updateOne = (req, res) =>{
     let id = req.params.id;
     ToDo.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
@@ -55,6 +59,7 @@ module.exports.updateOne = (req, res) =>{
     
 }
 
+//controller to delete one todo by id
 module.exports.deleteOne = (req, res) =>{
     const id = req.params.id
     ToDo.findByIdAndDelete(id)

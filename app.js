@@ -26,6 +26,7 @@ mongoose.Promise = global.Promise;
 mongoose.connection.on('open', ()=>{
     console.log("connected")
 })
+
 app.listen(PORT, ()=>{
     console.log(`app running on port no ${PORT}`)
 })
