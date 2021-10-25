@@ -8,4 +8,9 @@ router.get('/:id', todoController.getOnetodo) // route to show one todo by id
 router.put('/:id', todoController.updateOne) // route to update one todo by id
 router.delete('/:id', todoController.deleteOne) // route to delete one todo by id
 
+//day2 routes
+
+router.get('/category/:category', todoController.fetchByCategory)
+router.get('/title/:title', todoController.fetchByTitle)
+
 module.exports = router

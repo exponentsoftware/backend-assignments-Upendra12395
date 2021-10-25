@@ -70,3 +70,25 @@ module.exports.deleteOne = (req, res) =>{
         res.status(500).json({message:error.message})
     })
 }
+
+module.exports.fetchByCategory = (req, res)=>{
+    const category = req.params.category
+    ToDo.find({category:category})
+    .then((todo)=>{
+        res.status(200).json(todo)
+    })
+    .catch(err=>{
+        res.status(500).json({message: err.message})
+    })
+}
+
+module.exports.fetchByTitle = (req, res)=>{
+    const title = req.params.title
+    ToDo.find({title : title})
+    .then(todo=>{
+        res.status(200).json(todo)
+    })
+    .catch(err =>{
+        res.status(500).json({message : err.message})
+    })
+}
