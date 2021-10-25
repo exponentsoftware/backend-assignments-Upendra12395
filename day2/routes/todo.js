@@ -1,24 +1,11 @@
-const mongoose =  require('mongoose')
+const express = require('express');
+const router = express.Router();
+const todoController = require('../controllers/todo');
 
-//model for todo 
-const todoSchema = new mongoose.Schema({
-    userName:{
-        type : String,
-        require: true
-    },
-    title:{
-        type: String,
-        require : true
-    },
-    status:{
-        type: String,
-        required: true
-    },
-    category:{
-        type:String,
-        required:true
-    }
-},
-{timestamps:true});
+router.get('/', todoController.showToDo); // route to show all todo
+router.post('/addtodo', todoController.addtodo) // route to add todo
+router.get('/:id', todoController.getOnetodo) // route to show one todo by id
+router.put('/:id', todoController.updateOne) // route to update one todo by id
+router.delete('/:id', todoController.deleteOne) // route to delete one todo by id
 
-module.exports = mongoose.model("Todo", todoSchema);
+module.exports = router
