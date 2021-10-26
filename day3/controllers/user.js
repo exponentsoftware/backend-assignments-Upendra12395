@@ -1,4 +1,7 @@
+const e = require('express')
 const User = require('../models/user')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 module.exports.getAll = async (req, res)=>{
     User.find()
@@ -11,27 +14,51 @@ module.exports.getAll = async (req, res)=>{
 }
 
 module.exports.addUser = async(req, res)=>{
-    const {userName, email, phone, role} = req.body
-    if(!userName || !email || !phone || !role ){
+    const {userName, email, phone, role, password} = req.body
+    if(!userName || !email || !phone || !role || !password){
         return res.status(400).json('All fields required')
     }else{
         User.findOne({email : email}).then((user)=>{
             if(user){
                 return res.status(400).json({message : ' user already registered'})
             }else{
-                const newUser = new User({
-                    userName : userName,
-                    email : email,
-                    phone : phone,
-                    role : role
+                bcrypt.genSalt(10, (err, salt)=>{
+                    bcrypt.hash(password, salt, (err, hash)=>{
+                        if(err){
+                            throw err;
+                        }else{
+                            const newUser = new User({
+                                userName : userName,
+                                email : email,
+                                phone : phone,
+                                role : role,
+                                password : hash
+                            })
+                            newUser.save()
+                            .then((user)=>{
+                                res.status(200).json({user : user, message : 'user saved successfully'})
+                            })
+                            .catch(err =>{
+                                res.status(500).json({message: err.message})
+                            })
+                        }
+                    })
                 })
-                newUser.save()
-                .then((user)=>{
-                    res.status(200).json({user : user, message : 'user saved successfully'})
-                })
-                .catch(err =>{
-                    res.status(500).json({message: err.message})
-                })
+            }
+        })
+    }
+}
+
+module.exports.getLogIn = async (req, res)=>{
+    const {email, password } = req.body
+    if(!email || !password){
+        return res.status(400).json({message : 'All fields required'})
+    }else{
+        User.findOne({email : email}).then((user)=>{
+            if(!user){
+                res.status(400).json({message : 'User doen not exist Please signIn'})
+            }else{
+                
             }
         })
     }

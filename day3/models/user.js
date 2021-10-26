@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    password:{
+        type : String,
+        required : true
+    },
     todoList:{
         type : Array
     }
