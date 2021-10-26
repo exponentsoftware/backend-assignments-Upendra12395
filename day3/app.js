@@ -4,13 +4,14 @@ const bodyParser = require('body-parser')
 const cors = require('cors');
 require('dotenv').config();
 const todoRouter = require('./routes/todo')
+const userRouter = require('./routes/user')
 const app = express();
 app.use(express.json());
 
 app.use(cors());
 const PORT = process.env.PORT || 5000;
 const password = process.env.PASSWORD;
-const mongooseURL = `mongodb+srv://upendraa:${password}@cluster0.mwuaz.mongodb.net/mytodo?retryWrites=true&w=majority`;
+const mongooseURL = `mongodb+srv://upendraa:${password}@cluster0.mwuaz.mongodb.net/mytodo3?retryWrites=true&w=majority`;
 
 mongoose.connect(mongooseURL,{
     useNewUrlParser : true,
@@ -18,6 +19,7 @@ mongoose.connect(mongooseURL,{
 })
 
 app.use('/todo', todoRouter)
+app.use('/user', userRouter)
 app.get('/', (req, res) =>{
     res.send("hello")
 })
