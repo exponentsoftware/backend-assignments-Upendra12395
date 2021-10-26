@@ -58,7 +58,26 @@ module.exports.getLogIn = async (req, res)=>{
             if(!user){
                 res.status(400).json({message : 'User doen not exist Please signIn'})
             }else{
-                
+                bcrypt.compare(user.password, password).then((isMatch)=>{
+                    if(!isMatch){
+                        res.status(401).json({message : 'Email id or password incorrect'})
+                    }else{
+                        jwt.sign(
+                            {id : user._id},
+                            process.env.JWT_KEY,
+                            {
+                                expiresIn : 3600
+                            },
+                            (err, token)=>{
+                                if(err){
+                                    throw err;
+                                }else{
+                                    res.status(200).json({token : token})
+                                }
+                            }
+                        )
+                    }
+                })
             }
         })
     }
