@@ -9,7 +9,7 @@ const todoSchema = mongoose.Schema({
         type : String,
         required : true
     },
-    Status:{
+    status:{
         type : String,
         required : true
     },

@@ -1,19 +1,25 @@
-const express = require('express')
 const Todo = require('../models/todo')
+const User = require('../models/user')
 
 // controller to add todo
 module.exports.addtodo = async (req, res) =>{
-    const { userName, title, status, category} = req.body
-    if (!userName || !title || !status || !category){
+    const { userId, title, status, category} = req.body
+    if (!title || !status || !category){
         return res.status(400).json({ message: "please enter all fieds" });
     }
-    const newTodo = new ToDo({
-        userName : userName,
+    const id = req.user._id
+    const newTodo = new Todo({
+        userId : id,
         title:title,
         status:status,
         category:category
     });
     await newTodo.save().then((todo) => {
+                User.findById(id).then((user)=>{
+                    user.todoList.push(todo._id)
+                    user.save()
+                })
+                
                  return res.status(201).json({ message: "todo saved successfully." });
 				})
 				.catch((error) => {
@@ -23,7 +29,8 @@ module.exports.addtodo = async (req, res) =>{
 
 //controller to shwo all todo
 module.exports.showToDo = async (req, res) =>{
-    await ToDo.find()
+    const id = req.user._id
+    await Todo.find({userId : id})
     .then((todos) =>{
         res.status(200).json(todos)
     })
@@ -36,7 +43,7 @@ module.exports.showToDo = async (req, res) =>{
 //controller to show one todo by id
 module.exports.getOnetodo = async (req, res) =>{
     let id = req.params.id
-    await ToDo.findById(id)
+    await Todo.findById(id)
     .then((todo)=>{
         res.json(todo)
     })
@@ -48,7 +55,7 @@ module.exports.getOnetodo = async (req, res) =>{
 //controller to update one todo by id
 module.exports.updateOne = async (req, res) =>{
     let id = req.params.id;
-    await ToDo.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    await Todo.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((todo) =>{
         res.json(todo)
     })
@@ -61,7 +68,7 @@ module.exports.updateOne = async (req, res) =>{
 //controller to delete one todo by id
 module.exports.deleteOne = async (req, res) =>{
     const id = req.params.id
-    await ToDo.findByIdAndDelete(id)
+    await Todo.findByIdAndDelete(id)
     .then((todo)=>{
         res.send({message: "todo deleted successfully"})
     })
@@ -72,7 +79,7 @@ module.exports.deleteOne = async (req, res) =>{
 
 module.exports.fetchByCategory = async (req, res)=>{
     const category = req.params.category
-    await ToDo.find({category:category})
+    await Todo.find({category:category})
     .then((todo)=>{
         res.status(200).json(todo)
     })
@@ -83,7 +90,7 @@ module.exports.fetchByCategory = async (req, res)=>{
 
 module.exports.fetchByTitle = async (req, res)=>{
     const title = req.params.title
-    await ToDo.find({title : title})
+    await Todo.find({title : title})
     .then(todo=>{
         res.status(200).json(todo)
     })
@@ -93,7 +100,7 @@ module.exports.fetchByTitle = async (req, res)=>{
 }
 
 module.exports.sortTodo = async (req, res)=>{
-    await ToDo.find()
+    await Todo.find()
     .sort({createdAt: 1})
     .then((todo)=>{
         res.status(200).json(todo)
@@ -105,7 +112,7 @@ module.exports.sortTodo = async (req, res)=>{
 
 module.exports.updateStatus = async (req, res) =>{
     const id = req.params.id
-    await ToDo.updateOne({_id : {$eq:id}},{status : "Done"})
+    await Todo.updateOne({_id : {$eq:id}},{status : "Done"})
     .then((todo)=>{
         res.status(200).json({message : "Status updated to Done"})
     })
