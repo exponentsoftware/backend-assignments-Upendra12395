@@ -1,4 +1,4 @@
-const e = require('express')
+const express = require('express')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -58,7 +58,7 @@ module.exports.getLogIn = async (req, res)=>{
             if(!user){
                 res.status(400).json({message : 'User doen not exist Please signIn'})
             }else{
-                bcrypt.compare(user.password, password).then((isMatch)=>{
+                bcrypt.compare(password, user.password,).then((isMatch)=>{
                     if(!isMatch){
                         res.status(401).json({message : 'Email id or password incorrect'})
                     }else{

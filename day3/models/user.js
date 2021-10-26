@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const { isEmail } = require('validator')
+//const { isEmail } = require('validator')
 
 const userSchema = mongoose.Schema({
     userName:{
@@ -8,8 +8,8 @@ const userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        validate: [ isEmail, 'invalid email' ]
-        //match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+        //validate: [ isEmail, 'invalid email' ]
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     phone:{
         type: Number,

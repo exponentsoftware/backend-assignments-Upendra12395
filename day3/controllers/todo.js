@@ -1,6 +1,5 @@
 const express = require('express')
-const ToDo = require('../models/todo')
-const bodyParser = require('body-parser')
+const Todo = require('../models/todo')
 
 // controller to add todo
 module.exports.addtodo = async (req, res) =>{

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const todoSchema = mongoose.Schema({
+    userId : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "User"
+    },
     title:{
         type : String,
         required : true
@@ -12,11 +16,8 @@ const todoSchema = mongoose.Schema({
     category:{
         type : String,
         required : true
-    },
-    userId : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User"
     }
+    
 },{timestamps : true})
 
 module.exports = mongoose.model("Todo", todoSchema)
