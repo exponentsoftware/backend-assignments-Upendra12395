@@ -16,4 +16,9 @@ router.get('/titlewise/:title', todoController.fetchByTitle)
 router.get('/sortBycreatedDate', todoController.sortTodo)
 router.patch('/updateStatus/:id', todoController.updateStatus)
 
+//day3 routes
+router.get('/')
+router.get('/')
+router.get('/')
+
 module.exports = router
