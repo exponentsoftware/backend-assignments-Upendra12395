@@ -15,7 +15,7 @@ module.exports = (req, res, next)=>{
                 const _id = payLoad.id
                 User.findById(_id).then((userData)=>{
                     if(userData.role == "admin"){
-                        res.user = userData
+                        req.user = userData
                         next();
                     }else{
                         return res.status(400).json({message : "You are not authorized"})

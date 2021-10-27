@@ -27,10 +27,22 @@ module.exports.addtodo = async (req, res) =>{
 				});
 }
 
-//controller to shwo all todo
+//controller for user to shwo all todo for that user
 module.exports.showToDo = async (req, res) =>{
     const id = req.user._id
-    await Todo.find({userId : id})
+    await Todo.find({userId : id}).populate('userId', 'userName')
+    .then((todos) =>{
+        res.status(200).json(todos)
+    })
+    .catch((error)=>{
+        res.status(500).json({message:error.message})
+    })
+    
+}
+
+//controller for admin to show all todos
+module.exports.showToDoForAdmin = async (req, res) =>{
+    await Todo.find().populate('userId', 'userName')
     .then((todos) =>{
         res.status(200).json(todos)
     })

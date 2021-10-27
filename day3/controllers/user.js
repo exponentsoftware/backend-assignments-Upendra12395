@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports.getAll = async (req, res)=>{
-    User.find()
+    User.find().populate('todoList')
     .then((user)=>{
         res.status(200).json(user)
     })

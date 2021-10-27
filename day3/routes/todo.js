@@ -6,6 +6,7 @@ const adminAuth = require('../middleware/admin')
 
 
 router.get('/showTodo', userAuth, todoController.showToDo); // route to show all todo
+router.get('/showToDoForAdmin', adminAuth, todoController.showToDoForAdmin) // route for admin to show todo
 router.post('/addTodo', userAuth, todoController.addtodo) // route to add todo
 router.get('/getOne/:id', userAuth, todoController.getOnetodo) // route to show one todo by id
 router.put('/updateOne/:id', userAuth, todoController.updateOne) // route to update one todo by id
