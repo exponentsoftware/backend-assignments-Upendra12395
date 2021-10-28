@@ -14,5 +14,9 @@ router.delete('/deleteOneUser/:id', adminAuth, userController.deleteOneUser)
 
 //day5
 router.get('/todayRegistered', userController.todayRegistered)
+router.get('/todayActive', userController.todayActive)
+router.get('/weekActive', userController.todayActive)
+router.get('/monthActive', userController.todayActive)
+
 
 module.exports = router
