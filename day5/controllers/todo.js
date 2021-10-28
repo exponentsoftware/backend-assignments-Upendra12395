@@ -29,8 +29,14 @@ module.exports.addtodo = async (req, res) =>{
 
 //controller for user to shwo all todo for that user
 module.exports.showToDo = async (req, res) =>{
+    //pagination part limiting and control the data using page and limit
+    let {page =1, limit =10} = req.query
+    page = parseInt(page)
+    limit = parseInt(limit)
     const id = req.user._id
     await Todo.find({userId : id}).populate('userId', 'userName')
+    .skip((page -1)*limit)
+    .limit(limit)
     .then((todos) =>{
         res.status(200).json(todos)
     })
@@ -42,7 +48,13 @@ module.exports.showToDo = async (req, res) =>{
 
 //controller for admin to show all todos
 module.exports.showToDoForAdmin = async (req, res) =>{
+    //pagination part limiting and control the data using page and limit
+    let {page =1, limit =10} = req.query
+    page = parseInt(page)
+    limit = parseInt(limit)
     await Todo.find().populate('userId', 'userName')
+    .skip((page -1)*limit)
+    .limit(limit)
     .then((todos) =>{
         res.status(200).json(todos)
     })

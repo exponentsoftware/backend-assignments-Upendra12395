@@ -4,7 +4,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 module.exports.getAll = async (req, res)=>{
+    //pagination part limiting and control the data using page and limit
+    let {page =1, limit =10} = req.query
+    page = parseInt(page)
+    limit = parseInt(limit)
     User.find().populate('todoList')
+    .skip((page -1)*limit)
+    .limit(limit)
     .then((user)=>{
         res.status(200).json(user)
     })
