@@ -85,8 +85,7 @@ module.exports.updateOne = async (req, res) =>{
     })
     .catch((error)=>{
         res.status(500).json({message:error.message})
-    })
-    
+    }) 
 }
 
 //controller to delete one todo by id
