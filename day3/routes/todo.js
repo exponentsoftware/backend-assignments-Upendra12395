@@ -17,11 +17,7 @@ router.delete('/deleteOne/:id', userAuth, todoController.deleteOne) // route to 
 router.get('/categorywise/:category', adminAuth, todoController.fetchByCategory)
 router.get('/titlewise/:title', adminAuth, todoController.fetchByTitle)
 router.get('/sortBycreatedDate', adminAuth, todoController.sortTodo)
-router.patch('/updateStatus/:id', adminAuth, todoController.updateStatus)
-
-//day3 routes
-router.get('/')
-router.get('/')
-router.get('/')
+router.patch('/updateStatus/:id', userAuth, todoController.updateStatus)
+router.patch('/updateStatusByAdmin/:id', adminAuth, todoController.updateStatusByAdmin)
 
 module.exports = router
