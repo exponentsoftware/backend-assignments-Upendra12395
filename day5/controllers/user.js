@@ -2,6 +2,7 @@ const express = require('express')
 const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+var isodate = require("isodate");
 
 module.exports.getAll = async (req, res)=>{
     //pagination part limiting and control the data using page and limit
@@ -128,6 +129,17 @@ module.exports.deleteOneUser = async(req, res)=>{
         res.status(200).json({message : "user delete successfully"})
     })
     .catch(err =>{
+        res.status(500).json({message : err.message})
+    })
+}
+
+module.exports.todayRegistered = async (req, res) =>{
+    const todayDate = new Date()
+    User.find({createdAt : {$lte : isodate(todayDate)}})
+    .then((user)=>{
+        res.status(200).json(user)
+    })
+    .catch(err=>{
         res.status(500).json({message : err.message})
     })
 }
