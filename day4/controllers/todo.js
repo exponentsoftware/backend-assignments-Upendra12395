@@ -30,7 +30,7 @@ module.exports.addtodo = async (req, res) =>{
 //controller for user to shwo all todo for that user
 module.exports.showToDo = async (req, res) =>{
     const id = req.user._id
-    await Todo.find({userId : id}).populate('userId', 'userName')
+    await Todo.find().populate('userId', 'userName')
     .then((todos) =>{
         res.status(200).json(todos)
     })
@@ -41,16 +41,16 @@ module.exports.showToDo = async (req, res) =>{
 }
 
 //controller for admin to show all todos
-module.exports.showToDoForAdmin = async (req, res) =>{
-    await Todo.find().populate('userId', 'userName')
-    .then((todos) =>{
-        res.status(200).json(todos)
-    })
-    .catch((error)=>{
-        res.status(500).json({message:error.message})
-    })
+// module.exports.showToDoForAdmin = async (req, res) =>{
+//     await Todo.find().populate('userId', 'userName')
+//     .then((todos) =>{
+//         res.status(200).json(todos)
+//     })
+//     .catch((error)=>{
+//         res.status(500).json({message:error.message})
+//     })
     
-}
+// }
 
 //controller to show one todo by id
 module.exports.getOnetodo = async (req, res) =>{

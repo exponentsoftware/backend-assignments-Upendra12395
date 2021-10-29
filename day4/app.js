@@ -1,12 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
+const passport = require('passport')
 const cors = require('cors');
 require('dotenv').config();
 const todoRouter = require('./routes/todo')
 const userRouter = require('./routes/user')
 const app = express();
 app.use(express.json());
+
+app.use(passport.initialize());
 
 app.use(cors());
 const PORT = process.env.PORT || 5000;
