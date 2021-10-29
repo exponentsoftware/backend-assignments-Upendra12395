@@ -71,6 +71,12 @@ module.exports.deleteOne = async (req, res) =>{
     })
 }
 
+//==========================================================================================
+//Day 2 asignments for filtering the data
+// fetch by category
+// search by title
+// Add capability to sort the data by created_at
+
 module.exports.fetchByCategory = async (req, res)=>{
     const category = req.params.category
     await ToDo.find({category:category})

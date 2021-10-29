@@ -7,7 +7,8 @@ const adminAuth = require('../middleware/admin')
 const passport = require('passport')
 require('../middleware/admin')(passport)
 
-
+//day4 task
+//Signed in User should only be able to call the routes
 router.get('/showTodo', passport.authenticate('jwt', {session : false}), todoController.showToDo); // route to show all todo
 //router.get('/showToDoForAdmin', adminAuth, todoController.showToDoForAdmin) // route for admin to show todo
 router.post('/addTodo', passport.authenticate('jwt', {session : false}), todoController.addtodo) // route to add todo

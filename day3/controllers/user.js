@@ -3,6 +3,8 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//day3 task
+// Create api to get TODO list for User
 module.exports.getAll = async (req, res)=>{
     User.find().populate('todoList')
     .then((user)=>{

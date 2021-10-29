@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 
+//Create User roles for Admin, App user
 module.exports = (req, res, next)=>{
     const {authorization} = req.headers
     if(!authorization){

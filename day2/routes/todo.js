@@ -9,7 +9,11 @@ router.get('/getOne/:id', todoController.getOnetodo) // route to show one todo b
 router.put('/updateOne/:id', todoController.updateOne) // route to update one todo by id
 router.delete('/deleteOne/:id', todoController.deleteOne) // route to delete one todo by id
 
-//day2 routes
+//==========================================================================================
+//Day 2 asignments for filtering the data
+// fetch by category
+// search by title
+// Add capability to sort the data by created_at
 
 router.get('/categorywise/:category', todoController.fetchByCategory)
 router.get('/titlewise/:title', todoController.fetchByTitle)

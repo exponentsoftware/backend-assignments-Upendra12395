@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const Todo = require('../models/todo')
 
+
+// TODO List with Pagination
+// Add Pagination on all get routes
 module.exports.getAll = async (req, res) => {
     //pagination part limiting and control the data using page and limit
     let { page = 1, limit = 10 } = req.query
@@ -133,6 +136,9 @@ module.exports.deleteOneUser = async (req, res) => {
         })
 }
 
+
+// TODO List with Pagination
+// Add Pagination on all get routes
 module.exports.todayRegistered = async (req, res) => {
     //const todayDate = new Date()
     let { page = 1, limit = 10 } = req.query
@@ -154,6 +160,9 @@ module.exports.todayRegistered = async (req, res) => {
         })
 }
 
+
+// TODO List with Pagination
+// Add Pagination on all get routes
 module.exports.weekActive = async (req, res) => {
     let { page = 1, limit = 10 } = req.query
     page = parseInt(page)
@@ -169,6 +178,9 @@ module.exports.weekActive = async (req, res) => {
         })
 }
 
+
+// TODO List with Pagination
+// Add Pagination on all get routes
 module.exports.monthActive = async (req, res) => {
     let { page = 1, limit = 10 } = req.query
     page = parseInt(page)
@@ -184,6 +196,9 @@ module.exports.monthActive = async (req, res) => {
         })
 }
 
+
+// TODO List with Pagination
+// Add Pagination on all get routes
 module.exports.todayActive = async (req, res) => {
     let { page = 1, limit = 10 } = req.query
     page = parseInt(page)

@@ -1,3 +1,13 @@
+// Add User collection to store below user information:
+// User name
+// email
+// phone
+// created at
+// updated at
+// role
+// Add validation on phone and email from the Mongoose schema itself with error message handling
+// Link Todo list with User
+
 const mongoose = require('mongoose')
 //const { isEmail } = require('validator')
 

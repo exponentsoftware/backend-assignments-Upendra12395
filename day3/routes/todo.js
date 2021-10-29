@@ -4,7 +4,8 @@ const todoController = require('../controllers/todo');
 const userAuth = require('../middleware/user')
 const adminAuth = require('../middleware/admin')
 
-
+//day 3 task
+// User with App user role, should be able to fetch only his Todo list
 router.get('/showTodo', userAuth, todoController.showToDo); // route to show all todo
 router.get('/showToDoForAdmin', adminAuth, todoController.showToDoForAdmin) // route for admin to show todo
 router.post('/addTodo', userAuth, todoController.addtodo) // route to add todo

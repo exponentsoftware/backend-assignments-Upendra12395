@@ -3,7 +3,9 @@ const extractJWT = require('passport-jwt').ExtractJwt;
 const User = require('../models/user')
 const passport = require('passport')
 
-
+//day4 task
+//Use Passport Js and add authentication to your App
+//Create Register and Sign in APIs and on successful signin use Token based authentication
 module.exports = function (passport) {
     // const param = {
     //     secretKey : process.env.secretKey,
